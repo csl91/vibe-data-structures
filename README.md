@@ -94,14 +94,17 @@ Each data structure is documented with Big O complexity:
 ## 🔧 Key Features
 
 ### Consistent Interface Design
+
 All data structures implement `IDataStructure<T>` with standardized operations:
+
 - `bool Insert(T item)` - Add element
-- `bool Find(T item)` - Search for element  
+- `bool Find(T item)` - Search for element
 - `bool Remove(T item)` - Delete element
 - `int Count` - Number of elements
 - `void Clear()` - Empty the structure
 
 ### Comprehensive Benchmarking
+
 - **Warmup runs** to account for JIT compilation
 - **Multiple test sizes** (100, 1000, 5000, 10000 elements)
 - **Sequential and shuffled data** testing
@@ -109,6 +112,7 @@ All data structures implement `IDataStructure<T>` with standardized operations:
 - **Accurate timing** using `System.Diagnostics.Stopwatch`
 
 ### Developer-Friendly Testing
+
 - **Basic correctness tests** verify functionality
 - **Focused comparisons** between specific structures
 - **Command-line interface** for easy usage
@@ -117,37 +121,56 @@ All data structures implement `IDataStructure<T>` with standardized operations:
 ## 🎯 Usage Examples
 
 ### Compare Hash Table Implementations
+
 ```bash
 dotnet run compare HashTableChaining HashTableOpenAddressing
 ```
 
 ### Test with Different Data Patterns
+
 The benchmark automatically tests both:
+
 - **Sequential data** (1, 2, 3, ...) - best case for some structures
 - **Shuffled data** - reveals worst-case performance
 
 ### Extend with New Data Structures
+
 1. Implement `IDataStructure<T>` and `IBenchmarkable<T>`
 2. Add factory method to `BenchmarkRunner`
 3. Include in comprehensive benchmarks
 
-## 📈 Performance Insights
+## 📈 Performance Results
 
-From initial testing with 1000 elements:
-- **Hash Tables** excel at all operations (~0.01-0.05ms)
-- **Dynamic Arrays** fast insert (0.006ms), slower find/remove (~0.6-1.0ms)
-- **Binary Search Trees** consistent but slower with sequential data (~5ms)
-- **Heaps** optimize for min/max operations
+Comprehensive benchmarking results and analysis are available in [RESULTS.md](RESULTS.md), including:
+
+- **Performance rankings** for Insert, Find, and Remove operations
+- **Detailed timing data** across different data sizes (100, 1000, 5000 elements)
+- **Sequential vs shuffled data** impact analysis
+- **Scaling behavior** and complexity validation
+- **Practical recommendations** for choosing the right data structure
+- **Performance pitfalls** and architectural insights
+
+### Quick Performance Summary (1000 Elements)
+
+| Operation | Winner | Performance | Runner-up |
+|-----------|--------|-------------|-----------|
+| **Insert** | ArrayStack | 0.005ms | DynamicArray (0.005ms) |
+| **Find** | HashTableChaining | 0.010ms | HashTableOpenAddressing (0.013ms) |
+| **Remove** | HashTableChaining | 0.012ms | HashTableOpenAddressing (0.017ms) |
+
+**Key Insight**: Hash tables excel for lookup-heavy workloads, while arrays dominate insertion performance.
 
 ## 🔍 Development Guidelines
 
 ### Code Standards
+
 - **XML documentation** for all public APIs
 - **Big O complexity** documented in comments
 - **Consistent naming** following C# conventions
 - **Error handling** for edge cases (empty structures, etc.)
 
 ### Performance Focus
+
 - **JIT warmup** before measurements
 - **Memory-conscious** implementations
 - **Cache-friendly** data layouts where possible
@@ -156,6 +179,7 @@ From initial testing with 1000 elements:
 ## 🛠️ Future Enhancements
 
 Potential additions for expanded benchmarking:
+
 - Self-balancing trees (AVL, Red-Black)
 - Advanced hash tables (Robin Hood, Cuckoo)
 - Concurrent data structures
